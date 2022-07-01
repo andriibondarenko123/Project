@@ -81,7 +81,7 @@ data "aws_ami" "latest-ubuntu-linux-image" {
 }
 
 resource "aws_instance" "myapp-server" {
-    ami = data.aws_ami.latest-amazon-linux-image.id
+    ami = data.aws_ami.latest-ubuntu-linux-image.id
     instance_type = var.instance_type
 
     subnet_id = aws_subnet.myapp-subnet-1.id
