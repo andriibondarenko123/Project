@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_vpc" "myapp-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
-        Name: "${var.env_prefixavail_zone}-vpc"
+        Name: "${var.env_prefix}-vpc"
     }
 }
 
