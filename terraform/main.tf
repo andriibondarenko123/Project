@@ -91,8 +91,6 @@ resource "aws_instance" "myapp-server" {
     associate_public_ip_address = true
     key_name = "myapp-key-pair"
 
-    user_data = file("entry-script.sh")
-
     tags = {
         Name = "${var.env_prefix}-server"
     }
