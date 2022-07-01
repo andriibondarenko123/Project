@@ -67,17 +67,17 @@ resource "aws_default_security_group" "default-sg" {
     }
 }
 
-data "aws_ami" "latest-ubuntu-linux-image" {
+data "aws_ami" "ubuntu" {
     most_recent = true
-    owners = ["099720109477"]
     filter {
-        name = "name"
-        values = ["ubuntu-focal-20.04-amd64-server-20220610"]
+        name   = "name"
+        values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-20.08-amd64-server-*"]
     }
     filter {
-        name = "virtualization-type"
+        name = "virtualization - type"
         values = ["hvm"]
     }
+    owners = ["AWS"]
 }
 
 resource "aws_instance" "myapp-server" {
