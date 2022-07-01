@@ -72,7 +72,7 @@ data "aws_ami" "latest-ubuntu-linux-image" {
     owners = ["099720109477"]
     filter {
         name = "name"
-        values = ["ubuntu-focal-20.04-amd64-server-*"]
+        values = ["ubuntu-focal-20.04-amd64-server-20220610"]
     }
     filter {
         name = "virtualization-type"
