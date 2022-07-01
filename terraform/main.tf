@@ -71,13 +71,13 @@ data "aws_ami" "ubuntu" {
     most_recent = true
     filter {
         name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-20.08-amd64-server-*"]
+        values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
     }
     filter {
-        name = "virtualization - type"
+        name   = "virtualization-type"
         values = ["hvm"]
     }
-    owners = ["AWS"]
+    owners = ["099720109477"] 
 }
 
 resource "aws_instance" "myapp-server" {
