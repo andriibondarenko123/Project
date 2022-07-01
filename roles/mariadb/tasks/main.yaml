@@ -1,0 +1,12 @@
+- name: install mariadb
+  apt:
+    name:
+      - mariadb-server
+      - mariadb-service
+    state: latest
+
+- name: start mariadb service
+  service:
+    name: mariadb
+    enabled: yes
+    state: started

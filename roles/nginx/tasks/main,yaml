@@ -1,0 +1,50 @@
+- name: Install nginx
+  yum: name=nginx update_cache=yes
+
+- name: allow http
+  ufw: 
+    rule: allow
+    proto: http
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Enable nginx service
+  systemd:
+    name: nginx
+    enabled: yes
+
+- name: checking service status 
+  command: systemctl status nginx
+
+- name: Allow http and https trafic
+  ufw:
+    rule: allow
+    name: 'nginx full'
+
+- name: Refresh the firewall settings
+  ufw: 
+    state: reload
+
+- name: Create directory for domain
+  ansible.builtin.file:
+    path: /var/www/test_domain.com/html
+    state: directory
+
+- name: permissions for directory
+  ansible.builtin.file:
+    path: /var/www/test_domain.com
+    owner: root
+    group: root
+    mode: 0700
+  
+
+    
+
+
+  
+
+  

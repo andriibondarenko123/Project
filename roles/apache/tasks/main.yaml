@@ -1,0 +1,38 @@
+- name: update repo and cache
+  apt: 
+    update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Installing Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: Enabling httpd service and start 
+  service: 
+    name: apache2
+    enabled: yes
+    state: started
+
+- name: allow SSH protocol
+  ufw:
+    rule: allow
+    name: OpenSSH 
+  
+- name: Open port 80 
+  ufw: 
+    rule: allow
+    port: 80
+    
+- name: Open port 443
+  ufw: 
+    rule: allow
+    port: 443
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+    policy: allow
+
+- name: Restart webserver
+  become: yes
+  service: name=apache2 state=restarted

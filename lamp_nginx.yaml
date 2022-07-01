@@ -1,0 +1,29 @@
+---
+
+- hosts: lamp
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - apache
+
+- hosts: lamp
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - mariadb
+
+- hosts: lamp
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - PHP
+
+- hosts: nginx
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - nginx

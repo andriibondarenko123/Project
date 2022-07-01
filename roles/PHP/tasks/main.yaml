@@ -1,0 +1,11 @@
+- name: Install PHP
+  apt:
+    pkg:
+     - php 
+     - php-mysql 
+     - php-common 
+     - php-cli 
+     - php-json
+     - php-common 
+     - php-opcache 
+     - libapache2-mod-php      
