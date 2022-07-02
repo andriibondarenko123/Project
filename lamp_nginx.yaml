@@ -7,14 +7,14 @@
   roles:
     - apache
 
-- hosts: tag_Name_dev_derver
+- hosts: tag_Name_dev_server
   become: yes
   become_user: root
   become_method: sudo
   roles:
     - mariadb
 
-- hosts: tag_Name_dev_derver
+- hosts: tag_Name_dev_server
   become: yes
   become_user: root
   become_method: sudo
