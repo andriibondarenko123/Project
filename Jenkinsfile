@@ -9,35 +9,26 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        sh "terraform init"
-                        sh "terraform plan"
-                        sh "terraform apply --auto-approve"
-                            EC2_PUBLIC_IP = sh(
-                                script: "terraform output ec2_public_ip",
-                                returnStdout: true
-                            ).trim()
-                        }
+                    sh "terraform init"
+                    sh "terraform plan"
+                    sh "terraform apply --auto-approve"
                     }
                 }
             }
-            stage("Pull Playbook from SCM") {
-                steps {
-                  git 'https://github.com/andriibondarenko123/Project.git'
-              }
+        }
+        stage("execute ansible playbook") {
+            steps {
+                script {
+                    echo "waiting for EC2 servers to initialize" 
+                    sleep(time: 90, unit: "SECONDS") 
+                        
+                    echo "calling ansible playbook to configure ec2 instances"
+                    ansiblePlaybook credentialsId: 'newserver-ssh-key', disableHostKeyChecking: true, installation: 'ansible1', inventory: 'inventory_aws_ec2.yaml', playbook: 'lamp_nginx.yaml'
+                }  
             }
-            stage("execute ansible playbook") {
-                steps {
-                    script {
-                        echo "waiting for EC2 server to initialize" 
-                        sleep(time: 90, unit: "SECONDS") 
-                            
-                        echo "calling ansible playbook to configure ec2 instances"
-                        sh "ansible-playbook -i hosts lamp_nginx.yaml"
-                    }  
-                }
-            }
-        }   
-    }
+        }
+    }   
+}
     
 
 
